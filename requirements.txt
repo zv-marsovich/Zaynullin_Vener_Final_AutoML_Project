@@ -1,8 +1,10 @@
 pandas
 missingno
+mlflow==3.12.0
 catboost
 lightgbm
 xgboost
 matplotlib==3.10.9
 phik==0.12.4
+pytest
 scikit-learn==1.7.2
