@@ -1,0 +1,8 @@
+pandas
+missingno
+catboost
+lightgbm
+xgboost
+matplotlib==3.10.9
+phik==0.12.4
+scikit-learn==1.7.2
