@@ -5,6 +5,9 @@ catboost
 lightgbm
 xgboost
 matplotlib==3.10.9
+optuna==4.8.0
 phik==0.12.4
 pytest
 scikit-learn==1.7.2
+joblib
+psutil
