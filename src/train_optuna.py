@@ -161,47 +161,47 @@ def train_with_optuna(n_trials=30):
     print(f"   RMSE: {lr_rmse:.3f}, Time: {lr_time:.2f}s")
 
     # 2. XGBoost с Optuna
-    # print("\n🚀 Оптимизация XGBoost с Optuna...")
-    # start_time = time.time()
-    #
-    # study_xgb = optuna.create_study(
-    #     direction='minimize',
-    #     sampler=TPESampler(seed=42),
-    #     pruner=MedianPruner(n_startup_trials=5, n_warmup_steps=10)
-    # )
-    #
-    # study_xgb.optimize(
-    #     lambda trial: objective_xgb(trial, X_train, y_train, preprocessor),
-    #     n_trials=n_trials,
-    #     n_jobs=1,
-    #     show_progress_bar=True
-    # )
-    #
-    # xgb_time = time.time() - start_time
-    #
-    # # Обучение лучшей модели XGBoost
-    # best_xgb_params = study_xgb.best_params
-    # best_xgb_pipeline = Pipeline([
-    #     ('preprocessor', preprocessor),
-    #     ('model', XGBRegressor(**best_xgb_params, random_state=42, objective='reg:squarederror', verbosity=0))
-    # ])
-    # best_xgb_pipeline.fit(X_train, y_train)
-    #
-    # # Оценка на кросс-валидации
-    # xgb_scores = cross_val_score(best_xgb_pipeline, X_train, y_train,
-    #                              cv=3, scoring='neg_root_mean_squared_error')
-    # xgb_rmse = -xgb_scores.mean()
-    #
-    # results['XGBoost'] = {
-    #     'rmse': xgb_rmse,
-    #     'train_time': xgb_time,
-    #     'best_params': best_xgb_params,
-    #     'n_trials': n_trials
-    # }
-    # best_models['XGBoost'] = best_xgb_pipeline
-    #
-    # print(f"\n   ✅ Лучшие параметры: {best_xgb_params}")
-    # print(f"   ✅ RMSE: {xgb_rmse:.3f}, Time: {xgb_time:.2f}s")
+    print("\n🚀 Оптимизация XGBoost с Optuna...")
+    start_time = time.time()
+
+    study_xgb = optuna.create_study(
+        direction='minimize',
+        sampler=TPESampler(seed=42),
+        pruner=MedianPruner(n_startup_trials=5, n_warmup_steps=10)
+    )
+
+    study_xgb.optimize(
+        lambda trial: objective_xgb(trial, X_train, y_train, preprocessor),
+        n_trials=n_trials,
+        n_jobs=-1,
+        show_progress_bar=True
+    )
+
+    xgb_time = time.time() - start_time
+
+    # Обучение лучшей модели XGBoost
+    best_xgb_params = study_xgb.best_params
+    best_xgb_pipeline = Pipeline([
+        ('preprocessor', preprocessor),
+        ('model', XGBRegressor(**best_xgb_params, random_state=42, objective='reg:squarederror', verbosity=0))
+    ])
+    best_xgb_pipeline.fit(X_train, y_train)
+
+    # Оценка на кросс-валидации
+    xgb_scores = cross_val_score(best_xgb_pipeline, X_train, y_train,
+                                 cv=3, scoring='neg_root_mean_squared_error')
+    xgb_rmse = -xgb_scores.mean()
+
+    results['XGBoost'] = {
+        'rmse': xgb_rmse,
+        'train_time': xgb_time,
+        'best_params': best_xgb_params,
+        'n_trials': n_trials
+    }
+    best_models['XGBoost'] = best_xgb_pipeline
+
+    print(f"\n   ✅ Лучшие параметры: {best_xgb_params}")
+    print(f"   ✅ RMSE: {xgb_rmse:.3f}, Time: {xgb_time:.2f}s")
 
     # 3. CatBoost с Optuna
     print("\n🚀 Оптимизация CatBoost с Optuna...")
@@ -210,13 +210,13 @@ def train_with_optuna(n_trials=30):
     study_cat = optuna.create_study(
         direction='minimize',
         sampler=TPESampler(seed=42),
-        pruner=MedianPruner(n_startup_trials=5, n_warmup_steps=10)
+        pruner=MedianPruner(n_startup_trials=3, n_warmup_steps=10)
     )
 
     study_cat.optimize(
         lambda trial: objective_catboost(trial, X_train, y_train, cat_cols),
         n_trials=n_trials,
-        n_jobs=1,
+        n_jobs=-1,
         show_progress_bar=True
     )
 
