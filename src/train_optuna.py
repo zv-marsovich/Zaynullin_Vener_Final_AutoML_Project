@@ -30,6 +30,7 @@ from preprocessing import (
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(PROJECT_ROOT)
 os.makedirs('mlruns', exist_ok=True)
+os.makedirs('models', exist_ok=True)
 mlflow.set_tracking_uri('file://' + os.path.join(PROJECT_ROOT, 'mlruns'))
 
 
@@ -141,9 +142,6 @@ def objective_lgbm(trial, X_train, y_train, preprocessor, cat_cols):
 
 def train_with_optuna(n_trials=10):
     """Обучение всех моделей с Optuna"""
-
-    os.makedirs('models', exist_ok=True)
-
     print("=" * 60)
     print("AutoML с Optuna (байесовская оптимизация)")
     print(f"Время старта: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
