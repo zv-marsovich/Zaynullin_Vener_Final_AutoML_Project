@@ -65,6 +65,10 @@
 - **Системные метрики:** CPU, RAM, диск (psutil)
 - **Время обучения:** замеряется для каждой модели
 
+![Диаграммы метрик в MLflow](mlflow_diagrams/diagram1.png)
+![Диаграммы метрик в MLflow](mlflow_diagrams/diagram2.png)
+![Диаграммы метрик в MLflow](mlflow_diagrams/diagram3.png)
+
 ## Как запустить
 
 ### Локальный запуск:
