@@ -220,14 +220,5 @@ __marimo__/
 
 catboost_info/
 
-# MLflow
-mlruns/
-mlflow.db
-
-# Models (результаты обучения)
-models/
-*.pkl
-*.joblib
-
 # Optuna
 optuna_history*.png
