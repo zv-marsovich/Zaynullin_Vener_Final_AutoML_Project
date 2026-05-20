@@ -1,0 +1,14 @@
+artifact_uri: file:///media/venya/disk2/study_urfu/mlops/Zaynullin_Vener_Final_AutoML_Project/mlruns/659205451931466113/4447c99d1d6c45d5af7cc734a861e151/artifacts
+end_time: 1779239669170
+entry_point_name: ''
+experiment_id: '659205451931466113'
+lifecycle_stage: active
+run_id: 4447c99d1d6c45d5af7cc734a861e151
+run_name: AutoML_20260520_041421
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779239661254
+status: 4
+tags: []
+user_id: venya

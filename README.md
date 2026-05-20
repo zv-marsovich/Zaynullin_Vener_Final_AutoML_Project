@@ -70,7 +70,7 @@
 ### Локальный запуск:
 ```bash
 pip install -r requirements.txt
-python src/train_optuna.py
+python -m src.train_optuna
 mlflow ui  # для просмотра результатов
 ```
 

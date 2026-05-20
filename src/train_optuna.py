@@ -232,6 +232,7 @@ def train_with_optuna(n_trials=10):
         # 2. CatBoost с Optuna
         print("\n Оптимизация CatBoost с Optuna...")
         start_time = time.time()
+        log_system_metrics()
 
         X_train_cat = X_train.copy()
         X_test_cat = X_test.copy()
@@ -250,6 +251,7 @@ def train_with_optuna(n_trials=10):
         )
 
         cat_time = time.time() - start_time
+        log_system_metrics()
 
         best_cat_params = study_cat.best_params.copy()
         best_cat_model = CatBoostRegressor(
@@ -281,6 +283,7 @@ def train_with_optuna(n_trials=10):
         print(f"Test RMSE: {cat_test_rmse:.3f}, MAE: {cat_test_mae:.3f}, R2: {cat_test_r2:.3f}")
         print(f"Time: {cat_time:.2f}s")
 
+        log_system_metrics()
         mlflow.log_metrics(
             {
                 "CatBoost_cv_rmse": study_cat.best_value,
@@ -296,6 +299,7 @@ def train_with_optuna(n_trials=10):
         # 3. XGBoost с Optuna
         print("\n Оптимизация XGBoost с Optuna...")
         start_time = time.time()
+        log_system_metrics()
 
         study_xgb = optuna.create_study(
             direction='minimize',
@@ -311,6 +315,7 @@ def train_with_optuna(n_trials=10):
         )
 
         xgb_time = time.time() - start_time
+        log_system_metrics()
 
         best_xgb_params = study_xgb.best_params
         best_xgb_pipeline = Pipeline([
@@ -340,6 +345,7 @@ def train_with_optuna(n_trials=10):
         print(f"Test RMSE: {xgb_test_rmse:.3f}, MAE: {xgb_test_mae:.3f}, R2: {xgb_test_r2:.3f}")
         print(f"Time: {xgb_time:.2f}s")
 
+        log_system_metrics()
         mlflow.log_metrics(
             {
                 "XGBoost_cv_rmse": study_xgb.best_value,
@@ -354,6 +360,7 @@ def train_with_optuna(n_trials=10):
         # 4. LightGBM с Optuna
         print("\n Оптимизация LightGBM с Optuna...")
         start_time = time.time()
+        log_system_metrics()
 
         study_lgb = optuna.create_study(
             direction='minimize',
@@ -369,6 +376,7 @@ def train_with_optuna(n_trials=10):
         )
 
         lgb_time = time.time() - start_time
+        log_system_metrics()
 
         best_lgb_params = study_lgb.best_params
 
@@ -406,6 +414,7 @@ def train_with_optuna(n_trials=10):
         print(f"Test RMSE: {lgb_test_rmse:.3f}, MAE: {lgb_test_mae:.3f}, R2: {lgb_test_r2:.3f}")
         print(f"Time: {lgb_time:.2f}s")
 
+        log_system_metrics()
         mlflow.log_metrics(
             {
                 "LightGBM_cv_rmse": study_lgb.best_value,
