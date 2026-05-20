@@ -21,7 +21,7 @@ from catboost import cv as catboost_cv
 from lightgbm import LGBMRegressor
 from sklearn.linear_model import LinearRegression
 
-from preprocessing import (
+from .preprocessing import (
     run_preprocessing, get_features_target, get_columns_types,
     create_preprocessor, split_data
 )

@@ -2,8 +2,10 @@ import numpy as np
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.train_optuna import rmse_scorer
+
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def test_rmse_scorer():
