@@ -200,7 +200,6 @@ def train_with_optuna(n_trials=10):
         lr_pipeline.fit(X_train, y_train)
         lr_time = time.time() - start_time
 
-        # Оценка на тесте
         y_pred_lr = lr_pipeline.predict(X_test)
         lr_test_rmse = rmse_scorer(y_test, y_pred_lr)
         lr_test_mae = mean_absolute_error(y_test, y_pred_lr)

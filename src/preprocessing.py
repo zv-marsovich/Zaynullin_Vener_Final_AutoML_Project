@@ -39,12 +39,14 @@ def handle_missing_values(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+
 def remove_duplicates(df: pd.DataFrame) -> pd.DataFrame:
     """Удаление дубликатов"""
     df['fuel_type'] = df['fuel_type'].replace("gasoline", "petrol")
     df = df.drop_duplicates()
 
     return df
+
 
 def remove_columns(df: pd.DataFrame) -> pd.DataFrame:
     """Удаление не информативных столбцов , мультиколлинеарных и со слабой корелляцией с целевым признаком"""
@@ -104,6 +106,7 @@ def create_preprocessor(categorical_features: List, numerical_features: List) ->
 
     return preprocessor
 
+
 def split_data(
         features: pd.DataFrame,
         target: pd.Series,
@@ -112,6 +115,7 @@ def split_data(
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
     """Разделение данных на обучающую и тестовую выборки."""
     return train_test_split(features, target, test_size=test_size, random_state=random_state)
+
 
 def run_preprocessing(filepath: str) -> pd.DataFrame:
     df = load_data(filepath)
