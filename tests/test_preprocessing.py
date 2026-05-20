@@ -3,7 +3,6 @@ import os
 import pandas as pd
 import pytest
 
-
 from src.preprocessing import (
     load_data, handle_missing_values, remove_duplicates,
     filter_columns, get_features_target, get_columns_types
